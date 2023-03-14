@@ -29,7 +29,6 @@ public class UsuarioTeste extends BaseTeste {
     public void testeCriarUsuarioComSucesso() {
         Usuario usuario = new Usuario("morpheus", "leader", "email@email.com");
         given().
-            contentType(ContentType.JSON).
             body(usuario).
         when().
             post("/users").
