@@ -3,7 +3,6 @@ package teste;/*
  */
 
 import dominio.Usuario;
-import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 
@@ -11,13 +10,13 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-public class UsuarioTeste extends BaseTeste {
+public class TesteUsuario extends TesteBase {
 
     private static final String LISTA_USUARIO_ENDPOINT = "/users";
     private static final String CRIAR_USUARIO_ENDPOINT = "/user";
 
     @Test
-    public void testeListaDadosDoUsuario() {
+    public void testeMostraPaginaEspecifica() {
         given().
             params("page", "2").
         when().
