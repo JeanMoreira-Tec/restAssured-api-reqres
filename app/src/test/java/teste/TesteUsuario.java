@@ -37,6 +37,20 @@ public class TesteUsuario extends TesteBase {
         then().
             statusCode(HttpStatus.SC_CREATED).
             body("name", is("morpheus"));
+    }
 
+    @Test
+    public void testeDaQuantidadeDeItensPorPagina() {
+        given().
+                params("page", "2").
+                when().
+                get(LISTA_USUARIO_ENDPOINT).
+                then().
+                statusCode(HttpStatus.SC_OK).
+                body(
+               "page", is(2),
+"data.size", is(6),
+                     "data.findAll { it.avatar.startsWith('https://reqres.in') }.size()", is(6)
+                );
     }
 }
