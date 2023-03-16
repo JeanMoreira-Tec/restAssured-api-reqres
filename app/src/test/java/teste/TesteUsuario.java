@@ -41,16 +41,32 @@ public class TesteUsuario extends TesteBase {
 
     @Test
     public void testeDaQuantidadeDeItensPorPagina() {
+        int paginaEsperada = 2;
+
+        int perPageEsperado = retornaPerPageEsperado(paginaEsperada);
+
         given().
-                params("page", "2").
+                params("page", paginaEsperada).
                 when().
                 get(LISTA_USUARIO_ENDPOINT).
                 then().
                 statusCode(HttpStatus.SC_OK).
                 body(
-               "page", is(2),
-"data.size", is(6),
-                     "data.findAll { it.avatar.startsWith('https://reqres.in') }.size()", is(6)
+               "page", is(paginaEsperada),
+"data.size", is(perPageEsperado),
+                     "data.findAll { it.avatar.startsWith('https://reqres.in') }.size()", is(perPageEsperado)
                 );
+    }
+
+    private static int retornaPerPageEsperado(int page) {
+        int perPageEsperado = given().
+                param("page", page).
+            when().
+                get(LISTA_USUARIO_ENDPOINT).
+            then().
+                statusCode(HttpStatus.SC_OK).
+            extract().
+                path("per_page");
+        return perPageEsperado;
     }
 }
