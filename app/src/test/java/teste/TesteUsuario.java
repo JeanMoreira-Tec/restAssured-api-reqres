@@ -6,6 +6,9 @@ import dominio.Usuario;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,7 +33,10 @@ public class TesteUsuario extends TesteBase {
 
     @Test
     public void testeCriarUsuarioComSucesso() {
-        Usuario usuario = new Usuario("morpheus", "leader", "email@email.com","Moreira");
+       Map<String, String> usuario = new HashMap<>();
+       usuario.put("name", "morpheus");
+       usuario.put("job", "leader");
+
         given().
             body(usuario).
         when().
